@@ -2,13 +2,19 @@
 var articleView = {};
 
 articleView.populateFilters = function() {
-  $('article').not('.template').each(function() {
-    var authorName, category, optionTag;
-    authorName = $(this).find('address a').text();
-    optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
+  $('article').each(function() {
+    var articleFilterSource = $('#author-template').html();
+    var articleFilterTemplate = Handlebars.compile(articleFilterSource);
+    // <option value="{{author}}">{{author}}</option>
+    // <option value="rick">rick</option>
+    // var authorName, category, optionTag;
+    // authorName = $(this).find('address a').text();
+    optionTag = //coming from template
     $('#author-filter').append(optionTag);
 
-    category = $(this).attr('data-category');
+    var categoryFilterSource = $('#category-template').html();
+    var categoryFilterTemplate = Handlebars.compile(articleFilterSource);
+  //  category = $(this).attr('data-category');
     optionTag = '<option value="' + category + '">' + category + '</option>';
     if ($('#category-filter option[value="' + category + '"]').length === 0) {
       $('#category-filter').append(optionTag);
