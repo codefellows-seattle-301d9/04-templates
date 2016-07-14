@@ -14,7 +14,7 @@ articleView.populateFilters = function() {
       $('#category-filter').append(optionTag);
     }
   });
-};
+}; 
 
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
