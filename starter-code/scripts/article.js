@@ -1,13 +1,9 @@
+'use strict';
+
 var articles = [];
 
 function Article (opts) {
   for (key in opts) this[key] = opts[key];
-  // this.author = opts.author;
-  // this.authorUrl = opts.authorUrl;
-  // this.title = opts.title;
-  // this.category = opts.category;
-  // this.body = opts.body;
-  // this.publishedOn = opts.publishedOn;
 };
 
 Article.prototype.toHtml = function() {
