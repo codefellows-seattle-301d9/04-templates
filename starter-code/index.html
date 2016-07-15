@@ -12,7 +12,7 @@
     <!-- Code Fellows favicon -->
     <link rel="icon" type="image/x-icon" href="https://i.imgur.com/7v5ASc8.png">
     <!--
-  TODO: Complete this script tag below to hold the Handlebars template.
+  Done: Complete this script tag below to hold the Handlebars template.
     - Be sure to give it a meaningful id attribute, and don't forget to
       specify the type!
     - Insert correct placeholder properties based on our Model.
@@ -26,11 +26,24 @@
             {{publishStatus}}
             </div>
           </header>
-          <section class="article-body">{{body}}</section>
+          <section class="article-body">{{{body}}}</section>
           <a href="" class="read-on"> Read on &rarr;</a>
         </article>
       </script>
 
+
+      <!-- <script id="articles" type="text/x-handlebars-template">
+          <li>
+            <select id="author-filter">
+              <option value="{{author}}">Filter By Author</option>
+            </select>
+          </li>
+          <li>
+            <select id="category-filter">
+              <option value="{{category}}">Filter By Category</option>
+            </select>
+          </li>
+      </script> -->
 
 
     <!--
@@ -94,7 +107,7 @@
       &copy; 2016 Code Fellows | Static Blog | Happy Ipsum!
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="handlebars.js/4.0.5/handlebars.amd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
     <script src="scripts/blogArticles.js"></script>
     <script src="scripts/article.js"></script>
     <script src="scripts/articleView.js"></script>

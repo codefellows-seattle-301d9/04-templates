@@ -7,12 +7,14 @@ function Article (opts) {
   this.category = opts.category;
   this.body = opts.body;
   this.publishedOn = opts.publishedOn;
-}
+};
 
 Article.prototype.toHtml = function() {
-  // TODO: Use handlebars to render your articles!
+  // Done: Use handlebars to render your articles!
   //       - Select your template from the DOM.
   //       - Now "compile" your template with Handlebars.
+  var source = $('#blog-template').html();
+  var template = Handlebars.compile(source);
 
   // DONE: If your template will use properties that aren't on the object yet, add them.
   //   Since your template can't hold any JS logic, we need to execute the logic here.
@@ -22,9 +24,11 @@ Article.prototype.toHtml = function() {
   this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
   this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
 
-  // TODO: Use the function that Handlebars gave you to return your filled-in
+  return template(this);
+  // Done: Use the function that Handlebars gave you to return your filled-in
   //       html template for THIS article.
 };
+
 
 ourLocalData.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
@@ -37,3 +41,26 @@ ourLocalData.forEach(function(ele) {
 articles.forEach(function(a){
   $('#articles').append(a.toHtml());
 });
+
+function Filter (opts) {
+  this.author = opts.author;
+  this.category = opts.category;
+}
+
+// Filter.prototype.toHtml = function(){
+//   var source = $('#author-filter').html();
+//   var template = Handlebars.compile(source);
+//
+//   var category = $('#category-filter').html();
+//   var catTemplate = Handlebars.compile(category);
+//
+//   return template(this);
+// };
+//
+// ourLocalData.forEach(function(ele) {
+//   articles.push(new Filter(ele));
+// });
+//
+// .forEach(function(a){
+//   $('#filters').append(a.toHtml());
+// });
