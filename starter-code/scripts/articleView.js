@@ -2,16 +2,21 @@
 var articleView = {};
 
 articleView.populateFilters = function() {
-  $('article').not('.template').each(function() {
-    var authorName, category, optionTag;
-    authorName = $(this).find('address a').text();
-    optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
-    $('#author-filter').append(optionTag);
+  $('article').each(function() {
+    // populate the author filter
+    var authorData = $(this).data('author');
+    var authorFilterSource = $('#author-template').html();
+    var authorFilterTemplate = Handlebars.compile(authorFilterSource);
+    var authorOptionHtml = authorFilterTemplate({author:authorData});
+    $('#author-filter').append(authorOptionHtml);
 
-    category = $(this).attr('data-category');
-    optionTag = '<option value="' + category + '">' + category + '</option>';
-    if ($('#category-filter option[value="' + category + '"]').length === 0) {
-      $('#category-filter').append(optionTag);
+    // populate the category filter
+    var categoryData = $(this).data('category');
+    var categoryFilterSource = $('#category-template').html();
+    var categoryFilterTemplate = Handlebars.compile(categoryFilterSource);
+    var categoryOptionHtml = categoryFilterTemplate({category:categoryData});
+    if ($('#category-filter option[value="' + categoryData + '"]').length === 0) {
+      $('#category-filter').append(categoryOptionHtml);
     }
   });
 };
