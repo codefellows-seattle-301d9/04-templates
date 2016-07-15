@@ -3,21 +3,20 @@ var articleView = {};
 
 articleView.populateFilters = function() {
   $('article').each(function() {
-    var articleFilterSource = $('#author-template').html();
-    var articleFilterTemplate = Handlebars.compile(articleFilterSource);
-    // <option value="{{author}}">{{author}}</option>
-    // <option value="rick">rick</option>
-    // var authorName, category, optionTag;
-    // authorName = $(this).find('address a').text();
-    optionTag = //coming from template
-    $('#author-filter').append(optionTag);
+    // populate the author filter
+    var authorData = $(this).data('author');
+    var authorFilterSource = $('#author-template').html();
+    var authorFilterTemplate = Handlebars.compile(authorFilterSource);
+    var authorOptionHtml = authorFilterTemplate({author:authorData});
+    $('#author-filter').append(authorOptionHtml);
 
+    // populate the category filter
+    var categoryData = $(this).data('category');
     var categoryFilterSource = $('#category-template').html();
-    var categoryFilterTemplate = Handlebars.compile(articleFilterSource);
-  //  category = $(this).attr('data-category');
-    optionTag = '<option value="' + category + '">' + category + '</option>';
-    if ($('#category-filter option[value="' + category + '"]').length === 0) {
-      $('#category-filter').append(optionTag);
+    var categoryFilterTemplate = Handlebars.compile(categoryFilterSource);
+    var categoryOptionHtml = categoryFilterTemplate({category:categoryData});
+    if ($('#category-filter option[value="' + categoryData + '"]').length === 0) {
+      $('#category-filter').append(categoryOptionHtml);
     }
   });
 };
