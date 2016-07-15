@@ -1,18 +1,15 @@
 // Configure a view object, to hold all our functions for dynamic updates and article-related event handlers.
 var articleView = {};
 
-articleView.populateFilters = function() {
-  $('article').not('.template').each(function() {
-    var authorName, category, optionTag;
-    authorName = $(this).find('address a').text();
-    optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
-    $('#author-filter').append(optionTag);
-
-    category = $(this).attr('data-category');
-    optionTag = '<option value="' + category + '">' + category + '</option>';
-    if ($('#category-filter option[value="' + category + '"]').length === 0) {
-      $('#category-filter').append(optionTag);
+articleView.render = function() {
+  articles.forEach(function(currentArticle){
+    $('#articles').append(currentArticle.toHtml($('#blog_article_template')));
+    var placeholder = $('#category-filter option:contains("' + currentArticle.category + '")');
+    if(placeholder.length === 0) {
+      console.log(currentArticle.toHtml($('#category-template')));
+      $('#category-filter').append(currentArticle.toHtml($('#category-template')));
     }
+    $('#author-filter').append(currentArticle.toHtml($('#author-template')));
   });
 };
 
@@ -60,7 +57,7 @@ articleView.setTeasers = function() {
   });
 };
 
-articleView.populateFilters();
+articleView.render();
 articleView.handleCategoryFilter();
 articleView.handleAuthorFilter();
 articleView.handleMainNav();
